@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Travel Package";
+}
+<h2>Current Travel Packages</h2>
+<p>Here are some amazing trips and deals.</p>
+
+@model IEnumerable<TravelWeb.Models.TravelPackage>
+
+<h2>Available Travel Packages</h2>
+<div class="container mb-5 pb-5">
+    @foreach (var package in Model)
+    {
+        <div class="card mb-5 pb-3">
+            <div class="card-header">
+                <h4>@package.Title</h4>
+            </div>
+            <div class="card-body">
+                <div id="carousel-@package.Id" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @{
+                            var images = package.ImageUrls?.Split(',') ?? new string[0];
+                            for (int i = 0; i < images.Length; i++)
+                            {
+                                var imageUrl = "/images/agent_uploads/" + images[i];
+                                var activeClass = i == 0 ? "active" : "";
+                                <div class="carousel-item @activeClass">
+                                    <img src="@imageUrl" class="d-block w-100 img-fluid" style="max-height: 300px; object-fit: contain;" alt="Image">
+                                </div>
+                            }
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@package.Id" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-@package.Id" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <p>@package.Summary</p>
+                <p><strong>Price:</strong> $@package.Price</p>
+                <p><strong>Date:</strong> @package.TravelDate.ToShortDateString()</p>
+                <a asp-controller="TravelPackage" asp-route-id="@package.Id" asp-action="Details" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    }
+</div>

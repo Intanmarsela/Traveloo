@@ -1,0 +1,109 @@
+/* Set up your custom colour palette */
+:root {
+    --primary-color: #FFB84D; /* Orange */
+    --secondary-color: #FFF9EF; /* Light Beige */
+    --accent-color: #00BFFF; /* Sky Blue */
+    --text-color: #333333; /* Dark Grey */
+}
+
+/* Base font size settings */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    background-color: var(--secondary-color); /* Light beige background */
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* General body settings */
+body {
+    margin-bottom: 60px;
+    color: var(--text-color);
+    background-color: var(--secondary-color) !important; /* Force beige background */
+}
+
+/* Buttons focus styles */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--primary-color) !important;
+}
+
+/* Form placeholder colour */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--accent-color) !important;
+    text-align: end;
+}
+
+/* Form placeholder focus */
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* Navbar colour override */
+.navbar {
+    background-color: var(--primary-color) !important; /* Orange Navbar */
+}
+
+    .navbar a.nav-link {
+        color: white !important; /* White text for navbar links */
+    }
+
+        .navbar a.nav-link:hover {
+            color: var(--accent-color) !important; /* Blue on hover */
+        }
+
+/* Footer styling */
+.footer {
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+/* Card styling */
+.card {
+    background-color: white;
+    border: 1px solid var(--accent-color);
+}
+
+.card-title, .card-text {
+    color: var(--text-color);
+}
+
+/* Button primary */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-primary:hover {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+.navbar {
+    background-color: var(--primary-color) !important; /* Orange background */
+}
+
+    .navbar a.nav-link {
+        color: white !important; /* Force navbar links to be white */
+    }
+
+        .navbar a.nav-link:hover {
+            color: var(--accent-color) !important; /* Sky blue when hovered */
+        }
+
+.navbar-brand {
+    color: white !important; /* Traveloo brand text to white */
+}
+
+    .navbar-brand:hover {
+        color: var(--accent-color) !important; /* Brand hover = sky blue */
+    }

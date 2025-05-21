@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TravelWeb.Models.Booking>
+
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-4">My Trips</h2>
+
+    <div class="row">
+        @foreach (var booking in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <img src="~/images/agent_uploads/@(booking.TravelPackage?.ImageUrls?.Split(',')[0])" class="card-img-top" style="max-height:200px;object-fit:cover;" alt="Destination Image">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@booking.TravelPackage?.Title</h5>
+                        <p class="card-text">Date: @booking.TravelPackage?.TravelDate.ToShortDateString()</p>
+
+                        <div class="mt-auto">
+                            <a asp-controller="TravelPackage" asp-action="Details" asp-route-id="@booking.TravelPackageId" class="btn btn-primary mb-2">View Details</a>
+
+                            @if (booking.Review == null)
+                            {
+                                <a asp-controller="MyBookings" asp-action="LeaveReview" asp-route-id="@booking.BookingId" class="btn btn-outline-success">Leave Review</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

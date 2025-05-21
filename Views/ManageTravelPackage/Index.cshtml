@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TravelWeb.Models.TravelPackage>
+
+<h2>My Uploaded Travel Packages</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Travel Date</th>
+            <th>Price</th>
+            <th>Max Capacity</th>
+            <th>Current Bookings</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var package in Model)
+        {
+            <tr>
+                <td>@package.Title</td>
+                <td>@package.TravelDate.ToShortDateString()</td>
+                <td>$@package.Price</td>
+                <td>@package.MaxGroupSize</td>
+                <td>@package.CurrentBookings</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@package.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <!-- Future: Add "View Bookings" button -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

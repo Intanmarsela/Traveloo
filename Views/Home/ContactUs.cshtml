@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="container mb-5 pb-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Contact Us</h1>
+        <p class="lead">We’re here to help! Reach out to us with any questions, feedback, or travel inquiries.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h4>Get in Touch</h4>
+            <p><strong>📍 Address:</strong> 123 Traveloo Lane, Sydney, NSW 2000, Australia</p>
+            <p><strong>📞 Phone:</strong> +61 2 1234 5678</p>
+            <p><strong>📧 Email:</strong> <a href="mailto:info@traveloo.com">info@traveloo.com</a></p>
+            <p><strong>⏰ Hours:</strong> Monday – Friday: 9am – 5pm</p>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Send Us a Message</h4>
+            <form method="post" asp-action="Contact">
+                <div class="form-group mb-3">
+                    <label for="Name">Full Name</label>
+                    <input type="text" class="form-control" id="Name" name="Name" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Email">Email Address</label>
+                    <input type="email" class="form-control" id="Email" name="Email" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Message">Message</label>
+                    <textarea class="form-control" id="Message" name="Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>

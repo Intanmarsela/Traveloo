@@ -1,0 +1,32 @@
+﻿@model TravelWeb.Models.Booking
+
+@{
+    ViewData["Title"] = "Leave a Review";
+}
+
+<div class="container mt-5 mb-5">
+    <h2>Leave a Review for @Model.TravelPackage?.Title</h2>
+
+    <form asp-action="LeaveReview" method="post">
+        <input type="hidden" name="id" value="@Model.BookingId" />
+
+        <div class="mb-3">
+            <label for="StarRating" class="form-label">How would you rate your trip?</label>
+            <select name="starRating" class="form-control" required>
+                <option value="">-- Select Rating --</option>
+                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                <option value="4">⭐⭐⭐⭐ - Good</option>
+                <option value="3">⭐⭐⭐ - Average</option>
+                <option value="2">⭐⭐ - Poor</option>
+                <option value="1">⭐ - Terrible</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="reviewText" class="form-label">Tell us more about your experience:</label>
+            <textarea name="reviewText" class="form-control" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit Review</button>
+    </form>
+</div>

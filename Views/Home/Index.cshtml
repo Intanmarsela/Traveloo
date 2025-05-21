@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TravelWeb.Models.TravelPackage>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<div class="container-fluid bg-light text-center py-5" style="background-image: url('@Url.Content("~/images/landscape.jpg")'); background-size: cover; background-position: center;">
+    <div class="bg-overlay" style="background: rgba(0, 0, 0, 0.5); padding: 50px;">
+        <h1 class="display-3 text-white">Welcome to Traveloo</h1>
+        <p class="lead text-white mb-4">Explore the world with us — unforgettable journeys start here!</p>
+        <a href="/Home/About" class="btn btn-primary btn-lg">Learn More</a>
+    </div>
+</div>
+
+<!-- Featured Travel Packages Section -->
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="display-5">Featured Travel Packages</h2>
+        <p class="lead">Handpicked just for you</p>
+    </div>
+
+    <div class="row">
+        @foreach (var package in Model.Take(3)) // Only take top 3
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @{
+                        var images = package.ImageUrls?.Split(',') ?? new string[0];
+                        var firstImage = images.Length > 0 ? "/images/agent_uploads/" + images[0] : "~/images/placeholder.png"; // fallback image
+                    }
+                    <img src="@firstImage" class="card-img-top img-fluid" style="max-height: 250px; object-fit: cover;" alt="Package Image" />
+                    <div class="card-body">
+                        <h5 class="card-title">@package.Title</h5>
+                        <p class="card-text">@package.Summary</p>
+                        <p class="card-text"><strong>Price:</strong> $@package.Price</p>
+                        <a asp-controller="TravelPackage" asp-action="Details" asp-route-id="@package.Id" class="btn btn-outline-primary">View Package</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="container-fluid bg-light text-center py-5" style="background-image: url('@Url.Content("~/images/snow.jpg")'); background-size: cover; background-position: center;">
+    <div class="bg-overlay" style="background: rgba(0, 0, 0, 0.5); padding: 50px;">
+        <h2 class="display-5 text-white">Ready to Start Your Adventure?</h2>
+        <p class="lead text-white mb-4">Book your dream trip today with Traveloo!</p>
+        <a href="/Home/ContactUs" class="btn btn-light btn-lg">Contact Us</a>
+    </div>
+</div>

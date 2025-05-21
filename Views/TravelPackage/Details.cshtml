@@ -1,0 +1,81 @@
+﻿@model TravelWeb.Models.TravelPackage
+
+@{
+    ViewData["Title"] = "Travel Package Details";
+}
+
+<h2>@Model.Title</h2>
+
+<div class="mb-5 pb-5">
+    <div id="carousel-details" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                var images = Model.ImageUrls?.Split(',') ?? new string[0];
+                for (int i = 0; i < images.Length; i++)
+                {
+                    var img = "/images/agent_uploads/" + images[i];
+                    var active = i == 0 ? "active" : "";
+                    <div class="carousel-item @active">
+                        <img src="@img" class="d-block w-100 img-fluid" style="max-height: 400px; object-fit: contain;" alt="...">
+                    </div>
+                }
+
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-details" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-details" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<div class="container mb-5 pb-5">
+    <p><strong>Summary:</strong> @Model.Summary</p>
+    <p><strong>Price:</strong> $@Model.Price</p>
+    <p><strong>Date:</strong> @Model.TravelDate.ToShortDateString()</p>
+    <p><strong>Availability:</strong> @Model.MaxGroupSize - @Model.CurrentBookings remaining</p>
+    <p><strong>Description:</strong></p>
+    <p>@Model.FullDescription</p>
+
+    <a asp-controller="Booking" asp-route-id="@Model.Id" asp-action="Create" class="btn btn-primary">Book Now</a>
+
+    <hr />
+    <h3>Traveler Reviews</h3>
+
+    @{
+        var reviews = Model.Bookings?.Where(b => b.Review != null && b.IsReviewHidden != true).ToList();
+
+    }
+
+    @if (reviews != null && reviews.Any())
+    {
+        @foreach (var review in reviews)
+        {
+            var maskedUsername = review.User?.UserName != null
+            ? review.User.UserName.Substring(0, 1) + "***"
+            : "Anonymous";
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>
+                        @for (int i = 0; i < review.StarRating; i++)
+                        {
+                            <span>⭐</span>
+                        }
+                    </h5>
+                    <p class="text-muted mb-1">By @maskedUsername</p>
+                    <p class="card-text">@review.Review</p>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <p>No reviews yet. Be the first to leave one!</p>
+    }
+
+</div>

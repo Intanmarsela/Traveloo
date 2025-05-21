@@ -1,0 +1,58 @@
+﻿@model List<TravelWeb.Models.Booking>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Package Name</th>
+            <th>Tourist Name</th>
+            <th>Booking Date</th>
+            <th>Payment Status</th>
+            <th>Manage Payment</th>
+            <th>Reviews</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.TravelPackage.Title</td>
+                <td>@booking.User.DisplayName</td>
+                <td>@booking.BookingDate.ToShortDateString()</td>
+                <td>@booking.PaymentStatus</td>
+                <!-- Payment Status Update -->
+                <td>
+                    <form asp-action="UpdatePaymentStatus" method="post">
+                        <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                        <select name="newStatus">
+                            <option>Paid</option>
+                            <option>Pending</option>
+                            <option>Invoice Sent</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                    </form>
+                </td>
+
+                <!-- Manage Review -->
+                <td>
+                    @if (!string.IsNullOrEmpty(booking.Review))
+                    {
+                        if (booking.IsReviewHidden != true)
+                        {
+                            <form asp-action="HideReview" method="post">
+                                <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                                <button type="submit" class="btn btn-sm btn-danger">Hide</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="UnhideReview" method="post">
+                                <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                                <button type="submit" class="btn btn-sm btn-success">Unhide</button>
+                            </form>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
