@@ -22,4 +22,3 @@ If you want to try the application, please follow the steps below:
 	- username: maraa@gmail.com
 	- password: Asdfg123$
 
-Thankyou for visiting Traveloo. 
